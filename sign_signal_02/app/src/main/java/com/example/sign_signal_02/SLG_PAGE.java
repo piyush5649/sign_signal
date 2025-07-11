@@ -12,6 +12,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,8 +26,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.io.ByteArrayOutputStream;
 
-
 public class SLG_PAGE extends AppCompatActivity {
+
     private TextureView textureView;
     private Button startButton, stopButton;
     private CameraDevice cameraDevice;
@@ -34,7 +35,7 @@ public class SLG_PAGE extends AppCompatActivity {
     private boolean isStreaming = false;
     private StreamTask streamTask;
 
-    private static final String SERVER_IP = "192.168.45.102"; // Change to your server's IP
+    private static final String SERVER_IP = "10.94.91.102"; // Change to your server's IP
     private static final int SERVER_PORT = 5000;
 
     @Override
@@ -60,7 +61,9 @@ public class SLG_PAGE extends AppCompatActivity {
             public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {}
 
             @Override
-            public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) { return false; }
+            public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
+                return false;
+            }
 
             @Override
             public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {}
@@ -94,13 +97,6 @@ public class SLG_PAGE extends AppCompatActivity {
         try {
             String cameraId = cameraManager.getCameraIdList()[0];
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             cameraManager.openCamera(cameraId, new CameraDevice.StateCallback() {
@@ -161,9 +157,7 @@ public class SLG_PAGE extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try (Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                  OutputStream outputStream = socket.getOutputStream();
-                 InputStream inputStream = socket.getInputStream()
-            ) // Fixed reader declaration
-            {
+                 InputStream inputStream = socket.getInputStream()) {
 
                 while (isStreaming) {
                     Bitmap bitmap = textureView.getBitmap();
@@ -186,8 +180,13 @@ public class SLG_PAGE extends AppCompatActivity {
                     int bytesRead = inputStream.read(buffer);
                     if (bytesRead > 0) {
                         String response = new String(buffer, 0, bytesRead);
-                        Log.d("ServerResponse", "Received: " + response);
+
+                        // Show Toast on UI thread
+                        runOnUiThread(() -> {
+                            Toast.makeText(SLG_PAGE.this, "Server: " + response, Toast.LENGTH_SHORT).show();
+                        });
                     }
+
                     Thread.sleep(100); // Adjust streaming speed
                 }
 
