@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<color name="bg_screen">#F5F5F5</color>
+<color name="header_card_bg">#EEF0FF</color>
+<color name="camera_icon_bg">#C5C9FF</color>
+<color name="badge_bg">#FFFFFF</color>
+<color name="badge_dot">#4CAF50</color>
+<color name="section_title">#1A1A2E</color>
+<color name="card_bg">#FFFFFF</color>
+<color name="card_title">#1A1A1A</color>
+<color name="card_desc">#6B6B6B</color>
+<color name="emotion_icon_bg">#FFF9C4</color>
+<color name="pose_icon_bg">#FFEBEE</color>
+<color name="character_icon_bg">#E8EAF6</color>
+<color name="number_icon_bg">#F3E5F5</color>
+<color name="word_icon_bg">#E8F5E9</color>
+<color name="btn_emotion">#F5A623</color>
+<color name="btn_pose">#E53935</color>
+<color name="btn_character">#3949AB</color>
+<color name="btn_number">#8E24AA</color>
+<color name="btn_word">#2E7D32</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

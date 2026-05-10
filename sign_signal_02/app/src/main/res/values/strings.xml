@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">sign_signal_02</string>
+    <string name="title_activity_sa_page">SA_PAGE</string>
+    <string name="title_activity_sa_page.java">SA_PAGE.java</string>
 </resources>
